@@ -1,0 +1,5 @@
+test.js
+config.json
+*.iml
+.idea/*
+node_modules/*
