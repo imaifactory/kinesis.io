@@ -4,6 +4,11 @@
 
 ## Install
 
+```bash
+hoge
+
+```
+
 ## Synopsis
 
 You can handle Amazon Kinesis like event emitter object.
@@ -47,6 +52,20 @@ setInterval(function() {
 
 ```
 
+## Message Format
+
+```javascript
+
+{
+  "sequenceNumber": "196800000000000000000374",
+  "partitionKey": "2efdb0ea22685b46993e42a67302a001",
+  "data": "SOME CUSTOM DATA 1"
+}
+
+```
+
+## Distributed processing
+
 You can run on distributed EC2 fleet.
 
 Presequence: Driver daemon and Child daemons are to be running.
@@ -85,47 +104,5 @@ var stream = new kinetic({
   region: 'ap-northeast-1'
 });
 stream.emit('message','key','value');
-
-```
-
-Also you can run this in promise manner.
-
-```javascript
-
-var firstStream = new kinetic({
-  region:'ap-northeast-1',
-  streamName:'firstStream',
-  local: false // If true, you can run this locally.
-});
-
-var secondStream = new kinetic({
-  region:'ap-northeast-1',
-  streamName:'firstStream',
-  local: false // If true, you can run this locally.
-});
-
-var promise = kinetic.promiseFactory(
-  firstStream(),
-  function(value){
-    next(value.key,value.value)
-  }),
-  secondStream(),
-  function(value){
-    console.log(value);
-  })
-);
-
-promise.run('key','value');
-```
-
-## Message Format
-
-```javascript
-
-{
-  "sequenceNumber": "196800000000000000000374",
-  "partitionKey": "2efdb0ea22685b46993e42a67302a001",
-  "data": "SOME CUSTOM DATA 1"
-}
 
 ```
