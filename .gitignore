@@ -1,5 +1,4 @@
-test.js
-config.json
-*.iml
-.idea/*
+config*
 node_modules/*
+.idea/*
+*.iml
